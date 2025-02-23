@@ -34,7 +34,7 @@ file.close()
 
 
 plt.close('all')
-# Create figure 1
+# create figs. 2 a and b from the paper
 fig1, (ax1, ax2) = plt.subplots(2,1, figsize=(4,3.5), sharex=True, gridspec_kw={'height_ratios': [1, 1]})
 ax3 = ax2.twinx()  
 
@@ -44,6 +44,8 @@ for ax in [ax1, ax2]:
 iter_steps = np.arange(0, len(p_arr[0]), 1)
 ax1.set_ylim(-1.05, 1.05)
 lw = 1.
+
+# Plots the evolution of the parameters
 ax1.plot(iter_steps, p_arr[0], label=r'$p_1$', linewidth=lw, color='black')
 ax1.plot(iter_steps, p_arr[1], label=r'$p_2$', linewidth=lw, color='red')
 ax1.plot(iter_steps, p_arr[2], label=r'$p_3$', linewidth=lw, color='green')
@@ -51,11 +53,13 @@ ax1.plot(iter_steps, p_arr[3], label=r'$p_4$', linewidth=lw, color='blue')
 ax1.set_ylabel('Parameter values')
 ax1.legend(bbox_to_anchor=(0., 0.5, 0.5, 0.5), ncol=2, handlelength=1., columnspacing=1.,frameon=False)
 
+# Plot evolution of lambda
 ax2.plot(iter_steps, lambda_arr, color='black', linewidth=lw)
 ax2.fill_between(iter_steps, lambda_arr-1.95*lambda_err_arr, lambda_arr+1.95*lambda_err_arr, color = 'grey', alpha=0.5, label=r'$95\%$ confidence interval of $\lambda$')
 ax2.set_ylim(0.9975, 1.0001)
 ax2.set_ylabel(r'$\lambda$')
 
+# Plot the evolution of the mean value of x
 color = 'tab:red'
 ax3.set_ylabel(r'$\bar{x}$', color=color)
 ax3.tick_params(axis='y', labelcolor=color)
@@ -70,7 +74,7 @@ ax2.legend(loc='lower right', ncol=2, handlelength=1.5, columnspacing=0.3,frameo
 fig1.tight_layout()
 
 
-# Create figure 2
+# Create figure 2 c from the paper
 fig2, ax4 = plt.subplots(1,1, figsize=(4,2.5))
 
 x = np.linspace(-1.5, 1.5, 1000)
