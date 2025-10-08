@@ -4,12 +4,12 @@ Code to accomplish the paper 'Targeted Calibration to Adjust Stability Biases in
 
 ## Repo structure
 - The folder 'src' contains multiple files that together make up the package 'TargetedCalibrationInComplexSystemModels' which provides a framework for mapping the dynamical system under investigation into the form as presented in the paper (cf. section II) and for estimating the VAR models needed in order to follow the destabilization (optimization) procedure as described in section II. The package further provides some usefull problem unspecific tools such as function for determining the stability of a given system (cf. step 2. in section II).
-- The folder 'examples' displays two possibilities on how the method presented in the paper can be applied to actual systems. These systems are the same ones also discussed in section III of the paper, i.e. a Doulbe well system and the AMOC five box model. These systems were destabilized utilizing methods from the package 'TargetedCalibrationInComplexSystemModels'.
+- The folder 'examples' displays two possibilities on how the method presented in the paper can be applied to actual systems. These systems are the same ones also discussed in section III of the paper, i.e. a Double well system and the AMOC five box model. These systems were destabilized utilizing methods from the package 'TargetedCalibrationInComplexSystemModels'.
 
 ## Recreating the plots from the paper
-The code from the folder 'examples' can be used in order to recreate the plots displayed in the paper. To this end it is necessary to activate the 'examples' julia-environment.
+The code from the folder 'examples' can be used in order to recreate the plots displayed in the paper. To this end, it is necessary to activate the 'examples' julia-environment.
 
-In a first step the double well system and the AMOC box model system can be destabilized by the procedure discussed in section II by running 'examples/DoubleWell/DestabilizeDoulbeWell.jl' and 'examples/FiveBoxModel/DestabilizeBoxModel.jl' respectively (the file 'examples/FiveBoxModel/FiveBoxModel.jl' contains some auxiliary functions and definitions simplifying the destabilization of this model without being essential to the machanics of the destabilization procedure). This will induce the creation of data-folders in which the relevant data is saved. For a detailed explanation on how the destabilization procedure was implemented we refer to section II and III of the paper and the documentation within the respective code.
+In a first step, the double well system and the AMOC box model system can be destabilized by the procedure discussed in section II by running 'examples/DoubleWell/DestabilizeDoubleWell.jl' and 'examples/FiveBoxModel/DestabilizeBoxModel.jl' respectively (the file 'examples/FiveBoxModel/FiveBoxModel.jl' contains some auxiliary functions and definitions simplifying the destabilization of this model without being essential to the machanics of the destabilization procedure). This will induce the creation of data-folders in which the relevant data is saved. For a detailed explanation on how the destabilization procedure was implemented we refer to section II and III of the paper and the documentation within the respective code.
 
 In the case of the double well system the saved data can directly be plotted by running 'examples/DoubleWell/Plotting.py'. For the box model it is necessary to run 'examples/FiveBoxModel/HosingExperiment.jl' in order to generate the hystereses-data needed for the plots shown in figure 3 c and d before generating plots by running 'examples/FiveBoxModel/Plotting.py'. All plots are saved in respective folders that are automatically created.
 
@@ -48,7 +48,7 @@ The computational cost of the models can be analyzed by running 'examples/Double
       # Initialize the dynamical system
       DS = DynamicalSystem(f_p, f_o, x_init, p_init, random_vec_length=...)
       ```
-    - Implement a function 'calib_param_noise' which chooses suitable noise amplitudes used to vary the parameter values. For more detailes refer to the paper or the given examples (Doulbe well system and the AMOC five box model).
+    - Implement a function 'calib_param_noise' which chooses suitable noise amplitudes used to vary the parameter values. For more detailes refer to the paper or the given examples (Double well system and the AMOC five box model).
 - After the setup one can find paramter values which destabilize the system by iteratively applying the following procedure:
     - Optionally one can run the model for a transient time for it to equilibrate with respect to the current parameter values by running
       ```
