@@ -18,7 +18,7 @@ dt = 1.
 # Create array with the times to consider
 t_arr = collect(0:dt:t_max)
 
-# Set salinities to initial values and same for the initial parameters for the hosinge-xperiment using the 
+# Set salinities to initial values and same for the initial parameters for the hosing experiment using the 
 # FAMOUS parameters
 salinity_arr = initSalinitiesFAMOUS
 FAMOUS_param_arr = FAMOUSparams
@@ -49,6 +49,7 @@ function update_arr(arr,t)
     else
         sign = -1
     end
+    ## The numbers in the following four lines are parameter values AN, AS, AT and AIP from Wood et al., 2019.
     arr[get_index["F_N"]] += dt*sign*H_1*0.194
     arr[get_index["F_S"]] += -dt*sign*H_1*0.226
     arr[get_index["F_T"]] += dt*sign*H_1*0.597
@@ -72,7 +73,7 @@ function update_arr_no_hosing(arr)
 end
 
 
-# Conpute the hosing strength as a function of time t
+# Compute the hosing strength as a function of time t
 function hosing_traj(t)
     H_1 = 5e-4
     H = zeros(length(t))

@@ -53,7 +53,7 @@ file.close()
 
 
 plt.close('all')
-# Create figure 3 a and b from the paper
+# Create figure 4 a and b from the paper
 fig1, (ax1, ax2) = plt.subplots(2,1, figsize=(4,4), sharex=True, gridspec_kw={'height_ratios': [1.5, 1]})
 ax3 = ax2.twinx()  
 
@@ -93,7 +93,7 @@ ax2.legend(loc='lower right', ncol=2, handlelength=1.5, columnspacing=0.3,frameo
 fig1.tight_layout()
 
 
-# Create figures 3 c and d from the paper
+# Create figures 4 c and d from the paper
 fig2, (ax4, ax5) = plt.subplots(2,1, figsize=(4,4))
 
 max_idx = np.min(np.argmin(np.abs(hosing - 0.5)))

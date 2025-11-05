@@ -30,7 +30,7 @@ end
     Z(traj::Matrix; T::Union{Int64,Nothing}=nothing)
 
 This function turns a trajectory `traj`, which is a matrix with K rows, into a matrix Z as defined
-    in Lütkepohls book in equation (3.2.1) (where it is called Y) or in equation (A2) of the appendix
+    in Lütkepohls book in equation (3.2.1) (where it is called Y) or in equation (A2) of Appendix A
     by slicing the last `T` colomns from the `traj` argument. If `T===nothing` then `T` is set to the number of
     columns of `traj` minus 1 i.e. the `traj` argument is interpreted in such a way that it
     consists of all the presamples plus all the actual samples. If on the other hand `T` is given
@@ -53,7 +53,7 @@ end
     Y_t(traj::Matrix, t)
 
 Returns the vector Yₜ as defined e.g. in equation (3.2.1) in Lütkepohls book (where it is called Zₜ) and in
-    equation (A3) in the appendix. Here it is assumed that the trajectory `traj` includes the presample 
+    equation (A3) in Appendix A. Here it is assumed that the trajectory `traj` includes the presample 
     datapoints i.e. yₜ from the book corresponds to the column of `traj` with index `t+p`.
     Here we consider p=1 presamples.
 """
@@ -70,8 +70,8 @@ end
 """
     Y(traj; p::Int64=1, T::Union{Int64,Nothing}=nothing)
 
-Returns Y as defined in Lütkepohls book in equation (3.2.1) (where it is called Z) or in equation (A4) in the
-    appendix. If the number of columns of the trajectory `traj` does not equal T+p then an error is throuwn. 
+Returns Y as defined in Lütkepohls book in equation (3.2.1) (where it is called Z) or in equation (A4) in
+    Appendix A. If the number of columns of the trajectory `traj` does not equal T+p then an error is throuwn. 
     Here we consider p=1 presamples and `T` encodes the number of actual samples. 
 """
 function Y(traj; T::Union{Int64,Nothing}=nothing)

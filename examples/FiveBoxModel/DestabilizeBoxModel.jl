@@ -18,10 +18,10 @@ steps = 500                     # Determines how often the destabilization proce
 
 # This function chooses Δp such that it optimizes v*Δp - η_1 * (Δp',-1,0,...,0)Σ_nuv (Δp',-1,0,...,0)'
 # - η_2 * (0,...,0,Δp')Σ_nuv (0,...,0,Δp')' - η_n * (Δp'*n - u)^2 - η_σ * (Δp ./ σ)' * (Δp ./ σ)
-# where the first penalty term corrects the error in how the hyperplane is reached, the second penalty term controlls 
-# the error of v*Δp, the third term controlls the distance from the hyperplane (so η_n should be chosen large)
-# and the last term controlls the length of Δp since we want to fix the value of (Δp ./ σ)' * (Δp ./ σ) to l^2
-# η_σ is increased stepwise until (Δp ./ σ)' * (Δp ./ σ) is smaller than l^2 (cf. Appendix C)
+# where the first penalty term corrects the error in how the hyperplane is reached, the second penalty term controls 
+# the error of v*Δp, the third term controls the distance from the hyperplane (so η_n should be chosen large)
+# and the last term controls the length of Δp since we want to fix the value of (Δp ./ σ)' * (Δp ./ σ) to l^2
+# η_σ is increased stepwise until (Δp ./ σ)' * (Δp ./ σ) is smaller than l^2 (cf. Appendix D, and Sect. III B)
 function param_update(v::Vector, σ::Vector, n::Vector, u::Number, l::Number, Σ_nuv::Matrix, η_1::Number, η_2::Number, η_n::Number, η_σ_min::Number)
     η_σ = η_σ_min
     d_p = length(v)
@@ -69,7 +69,7 @@ function f_p(x,p,r)
     V_T = get_V_T(arr)
     V_IP = get_V_IP(arr)
     V_B = get_V_B(arr)
-    # Compute the additional additive noise (cf. section III.B of the paper)
+    # Compute the additional additive noise (cf. section III B of the paper)
     uN = √(dt)*noise_amp*r[1]/V_N
     uT = √(dt)*noise_amp*r[2]/V_T
     uS = √(dt)*noise_amp*r[3]/V_S
@@ -188,7 +188,7 @@ for i in 1:steps
     A_p = B[1,3:d_p+2]
     A_qp = B[1,d_p+3:end]
 
-    # Use the information obtained above to update the parameter values as described in Appendix C  
+    # Use the information obtained above to update the parameter values as described in Appendix D  
     # (cf. step 5 of the procudure outlined in sec II of the paper)
 
     # normal vector of the hyperplane with u = n*Δp
@@ -197,7 +197,7 @@ for i in 1:steps
     # Gradient of the jacobian with respect to the parameters
     v = vec(A_qp)
 
-    # Compute Σ_nuv which is the covariance matrix of (n', u, v')' (cf. Appendix C of the paper)
+    # Compute Σ_nuv which is the covariance matrix of (n', u, v')' (cf. Appendix D of the paper)
     mat_n = sparse([zeros(2,d_p); [1, q_mean] ⊗ Id(d_p)])
     mat_u = [-1; -q_mean; -DS.p_init; -q_mean * DS.p_init]
     mat_v = sparse([zeros(2+d_p,d_p); Id(d_p)])

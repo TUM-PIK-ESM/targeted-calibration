@@ -93,7 +93,7 @@ end
 """
     auxFitVARmodel(Z_arr::Matrix{Float64},Y_arr::Matrix{Float64})
 
-Fits a simple VAR model of order `p` to the data, cf. the appendix
+Fits a simple VAR model of order `p` to the data, cf. Appendix A
 """
 function auxFitVARmodel(Z_arr::Matrix{Float64},Y_arr::Matrix{Float64})
 
