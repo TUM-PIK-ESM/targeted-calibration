@@ -5,9 +5,9 @@ using Kronecker
 # Tests if the model significantly depends on the parameter with index `param_idx`.
 function test_param_dependency(B::Matrix{Float64}, Σ_β::Matrix{Float64}, param_idx::Int64)
     # Determine how many parameters the model is using in total (this is specific for the five box model
-    # where we have only one observalbe q, i.e. d_o = 1)
+    # where we have only one observable q, i.e. d_o = 1)
     numb_of_params = Int64((size(B,2) - 2)/2)
-    # Find the collumns within the matrix B that display the parameter dependence of the VAR model on the
+    # Find the columns within the matrix B that display the parameter dependence of the VAR model on the
     # parameter of interest.
     param_loc = param_idx .+ [2, 2 + numb_of_params]
     return any(abs.(B[param_loc]) .> 200*sqrt.([Σ_β[i,i] for i in param_loc]))
@@ -63,12 +63,12 @@ end
 # the noise amplitude which yields a variance of the observables closest to the reference value. If this value is
 # larger than `2 * reference value` then the function looks for the noise amplitude which yields a variance of the
 # observables closest to the reference value but smaller than the reference value. If this value is zero then the
-# then the minumun noise value from the respective column of `noise_arr` is chosen as noise for this parameter.
+# minimum noise value from the respective column of `noise_arr` is chosen as noise for this parameter.
 # Otherwise the respective noise amplitude is chosen as noise for this parameter. If this noise amplitude is larger
 # than `σ_max` then `σ_max` is chosen as noise for this parameter.
-# The reson why we had to choose the value of `σ_max` really high in the function `pre_calibration` is that otherwise
-# it could happen that the reference noise is choosen extemely small (e.g. in the case where one of the parameters
-# has a values very close to the boundary so we dont want it to vary much more) and this would lead to the noise
+# The reason why we had to choose a very large value of `σ_max` in the function `pre_calibration` is that otherwise
+# it could happen that the reference noise is chosen extremely small (e.g. in the case where one of the parameters
+# has a value very close to the boundary so we don not want it to vary much more); this would lead to the noise
 # amplitude for the other parameters to be chosen unneccessarily small as well. 
 function calibrate_noise(σ_x_arr, noise_arr, σ_max::Vector{Float64})
     numb_of_params = size(σ_x_arr,2)
