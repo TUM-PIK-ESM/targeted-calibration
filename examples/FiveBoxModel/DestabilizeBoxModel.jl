@@ -136,14 +136,14 @@ for i in 1:steps
     global x_tr,p_tr,_,_ = integrateTraj(DS,100000)
     DS.x_init = x_tr[:,end]
 
-    # Fit the model for fixed parameter values (reference model) (cf. step 1 of the procudure outlined
+    # Fit the model for fixed parameter values (reference model) (cf. step 2 of the procedure outlined
     # in sec II of the paper)
     global x_tr,_,q_tr,noise = integrateTraj(DS,1000000)
     q_mean_arr[i+1] = mean(q_tr, dims = 2)[1]
     println("q_mean = ", q_mean_arr[i+1])
     ref_model = fitVARmodel(q_tr)
 
-    # use the reference model to determine the time scale of the system (cf. step 2 of the procudure outlined
+    # use the reference model to determine the time scale of the system (cf. step 3 of the procudure outlined
     # in sec II of the paper)
     global ts = timeScale(ref_model, include_error = true)
     ts_arr[i+1] = ts[1]
@@ -158,7 +158,7 @@ for i in 1:steps
         ts = ts[1]
     end
 
-    # Find suitable noise amplitudes for the parameters using the methods form CalibrateParameterNoise.jl
+    # Find suitable noise amplitudes for the parameters using the methods from CalibrateParameterNoise.jl (step 3)
     if (i-1) % 10 == 0 
         σ_x_arr = zeros(40,d_p)
         noise_arr = zeros(40,d_p)

@@ -17,7 +17,7 @@ end
 # Only the parameter with index `param_idx` is varied and all other parameters are held constant.
 # The noise amplitude (standard deviation: as the noise is later still multiplied by a factor of √(1-(1/ts)^2))
 # is increased from `σ_init` to `σ_max` in steps of factor 2. The noise amplitudes in each step are saved in the
-# array `noise_arr`. Further the variances of the observables are stored in the respactive place in the array 
+# array `noise_arr`. Further the variances of the observables are stored in the respective place in the array 
 # `σ_x_arr` if the parameter is causal for the observables. If this is not the case then 0 is stored in the
 # respective place. If the variance of an observable exceeds `σ_x_max^2` then the loop is stopped leaving the
 # remaining places in `noise_arr` and `σ_x_arr` filled with zeros.
