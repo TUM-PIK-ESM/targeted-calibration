@@ -1,6 +1,9 @@
-# TargetedCalibrationInComplexSystemModels
+# Targeted Calibration Of Complex System Models
 
 Code to accomplish the paper 'Targeted Calibration to Adjust Stability Biases in Non-differentiable Complex System Models'.
+Written by Daniel Pals et al.
+Original Repository: https://github.com/DanielJonathanPals/TargetedCalibrationInComplexSystemModels.jl
+
 
 ## Installation
 - install Julia
